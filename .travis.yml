@@ -1,0 +1,12 @@
+sudo: required
+
+
+services:
+  - docker
+
+
+script: bash travis.sh || travis_terminate 1;
+
+notifications:
+   email:
+      - sonicarolina.blanco@gmail.com
