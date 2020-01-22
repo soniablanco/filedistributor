@@ -17,7 +17,8 @@ const uploadFile = async (projectName,variantName,fileNameToUse,filePath)  =>   
     const params = {
         Key:`${projectName}/${variantName}/${fileNameToUse}`,
         Bucket: BUCKET_NAME,
-        Body: fileContent
+        Body: fileContent,
+        ACL:'public-read'
     };
     await s3.upload(params).promise()
     return `https://${encodeURIComponent(params.Bucket)}.s3.amazonaws.com/${encodeURIComponent(params.Key)}`
