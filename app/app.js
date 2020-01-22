@@ -57,7 +57,7 @@ process.on('unhandledRejection', up => { throw up });
   const changeLog = await readFileAsync(CHANGELOG_PATH);
   const apkLocation = APK_FOLDER + outputInfo.path;  
 
-  var apkData = '';
+  var apkData;
   if(outputInfo.apkData){
     apkData = outputInfo.apkData;
   } else {
