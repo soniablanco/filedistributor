@@ -67,14 +67,14 @@ process.on('unhandledRejection', up => { throw up });
 
 
 
-  //const variantFolderId= await getVariantFolderId(oAuth2Client,rootFolderId);  
+  const variantFolderId= await getVariantFolderId(oAuth2Client,rootFolderId);  
   const fileNameToUse =  apkData.fullName + '-'+ uniqueVersionInfo + '.apk'
-  /*const fileId = await uploadFileAsync(oAuth2Client,apkLocation,fileNameToUse,changeLog.toString(), variantFolderId)
+  const fileId = await uploadFileAsync(oAuth2Client,apkLocation,fileNameToUse,changeLog.toString(), variantFolderId)
   const s3File = await uploadS3(process.env.PROJECT_NAME,process.env.VARIANT_NAME,fileNameToUse,apkLocation)
   await shareFile(oAuth2Client,fileId)
   var emailParams = getEmailParameters(fileId, variantFolderId,changeLog, uniqueVersionInfo,s3File);
   var result =  await sendEmail(oAuth2Client,emailParams)
-  console.log(result)*/
+  console.log(result)
 })();
 return;
 
