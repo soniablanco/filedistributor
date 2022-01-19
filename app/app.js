@@ -52,7 +52,7 @@ process.on('unhandledRejection', up => { throw up });
   const token = JSON.parse(await readFileAsync(TOKEN_PATH))  
   oAuth2Client.setCredentials(token);
   
-  const outputInfo=JSON.parse(await readFileAsync(OUTPUT_PATH))[0]  
+  const outputInfo=JSON.parse(await readFileAsync(OUTPUT_PATH))
   const revision = await readFileAsync(REVISION_PATH)
   const changeLog = await readFileAsync(CHANGELOG_PATH);
   
@@ -64,7 +64,7 @@ process.on('unhandledRejection', up => { throw up });
 
 
   const variantFolderId= await getVariantFolderId(oAuth2Client,rootFolderId);  
-  const fileNameToUse =  outputInfo.outputFile + '-'+ uniqueVersionInfo + '.apk'
+  const fileNameToUse =  apkData.outputFile + '-'+ uniqueVersionInfo + '.apk'
   const fileId = await uploadFileAsync(oAuth2Client,apkLocation,fileNameToUse,changeLog.toString(), variantFolderId)
   const s3File = await uploadS3(process.env.PROJECT_NAME,process.env.VARIANT_NAME,fileNameToUse,apkLocation)
   await shareFile(oAuth2Client,fileId)
