@@ -55,9 +55,10 @@ process.on('unhandledRejection', up => { throw up });
   const outputInfo=JSON.parse(await readFileAsync(OUTPUT_PATH))[0]  
   const revision = await readFileAsync(REVISION_PATH)
   const changeLog = await readFileAsync(CHANGELOG_PATH);
-  const apkLocation = APK_FOLDER + outputInfo.outputFile;  
+  
 
   var apkData = outputInfo.elements[0];
+  const apkLocation = APK_FOLDER + apkData.outputFile;  
   const uniqueVersionInfo = apkData.versionName + '('+ apkData.versionCode.toString() + ')-SC(' + revision+')';
 
 
