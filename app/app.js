@@ -31,7 +31,7 @@ const rootFolderId=process.env.GDRIVE_ROOT_FOLDER_ID
 
 const CREDENTIALS_PATH = SECRET_FOLDER + 'credentials.json';
 const TOKEN_PATH = SECRET_FOLDER + 'token.json';
-const OUTPUT_PATH = APK_FOLDER + 'output.json';
+const OUTPUT_PATH = APK_FOLDER + 'output-metadata.json';
 const CHANGELOG_PATH = APK_FOLDER + 'changelog';
 const REVISION_PATH = APK_FOLDER + 'revision';
 
