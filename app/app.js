@@ -40,7 +40,6 @@ const CHANGELOG_PATH = APK_FOLDER + 'changelog';
 const REVISION_PATH = APK_FOLDER + 'revision';
 
 
-process.on('unhandledRejection', up => { throw up });
 
 (async function(){
   console.log(OUTPUT_PATH);
