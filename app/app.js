@@ -63,12 +63,16 @@ const REVISION_PATH = APK_FOLDER + 'revision';
   var apkData = outputInfo.elements[0];
   const apkLocation = APK_FOLDER + apkData.outputFile;  
   const uniqueVersionInfo = apkData.versionName + '('+ apkData.versionCode.toString() + ')-SC(' + revision+')';
-
+  console.log(uniqueVersionInfo);
 
 
   const variantFolderId= await getVariantFolderId(oAuth2Client,rootFolderId);  
+  console.log(variantFolderId);
   const fileNameToUse =  apkData.outputFile + '-'+ uniqueVersionInfo + '.apk'
+  console.log(fileNameToUse);
+  console.log(apkLocation);
   const fileId = await uploadFileAsync(oAuth2Client,apkLocation,fileNameToUse,changeLog.toString(), variantFolderId)
+  console.log('s3 readt');
   const s3File = await uploadS3(process.env.PROJECT_NAME,process.env.VARIANT_NAME,fileNameToUse,apkLocation)
   await shareFile(oAuth2Client,fileId)
   var emailParams = getEmailParameters(fileId, variantFolderId,changeLog, uniqueVersionInfo,s3File);
