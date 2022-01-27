@@ -24,7 +24,11 @@ const util = require('util');
 const SCOPES = ['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/gmail.send'];
 
 const SECRET_FOLDER = '/secrets/';
-const APK_FOLDER = '/apk/';
+
+const args = process.argv.slice(2)
+
+
+const APK_FOLDER = args[0];
 
 
 const rootFolderId=process.env.GDRIVE_ROOT_FOLDER_ID
@@ -39,7 +43,7 @@ const REVISION_PATH = APK_FOLDER + 'revision';
 process.on('unhandledRejection', up => { throw up });
 
 (async function(){
-  
+  console.log(OUTPUT_PATH);
   const readFileAsync = util.promisify(fs.readFile)
   console.log(CREDENTIALS_PATH)
   const credentials= JSON.parse(await readFileAsync(CREDENTIALS_PATH))
