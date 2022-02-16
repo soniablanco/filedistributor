@@ -40,7 +40,7 @@ const CHANGELOG_PATH = APK_FOLDER + 'changelog';
 const REVISION_PATH = APK_FOLDER + 'revision';
 
 
-
+process.on('unhandledRejection', up => { throw up });
 (async function(){
   console.log(OUTPUT_PATH);
   const readFileAsync = util.promisify(fs.readFile)
@@ -62,13 +62,13 @@ const REVISION_PATH = APK_FOLDER + 'revision';
 
   var apkData = outputInfo.elements[0];
   const apkLocation = APK_FOLDER + apkData.outputFile;  
-  const uniqueVersionInfo = apkData.versionName + '('+ apkData.versionCode.toString() + ')-SC(' + revision+')';
+  const uniqueVersionInfo = apkData.versionName + '('+ apkData.versionCode.toString() + ')-(' + revision+')';
   console.log(uniqueVersionInfo);
 
 
   const variantFolderId= await getVariantFolderId(oAuth2Client,rootFolderId);  
   console.log(variantFolderId);
-  const fileNameToUse =  apkData.outputFile + '-'+ uniqueVersionInfo + '.apk'
+  const fileNameToUse =  process.env.PROJECT_NAME + '-' + apkData.outputFile.split('.').slice(0, -1).join('.') + '-'+ uniqueVersionInfo + '.apk'
   console.log(fileNameToUse);
   console.log(apkLocation);
   const fileId = await uploadFileAsync(oAuth2Client,apkLocation,fileNameToUse,changeLog.toString(), variantFolderId)
