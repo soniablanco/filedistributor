@@ -36,8 +36,6 @@ const rootFolderId=process.env.GDRIVE_ROOT_FOLDER_ID
 const CREDENTIALS_PATH = SECRET_FOLDER + 'credentials.json';
 const TOKEN_PATH = SECRET_FOLDER + 'token.json';
 const OUTPUT_PATH = APK_FOLDER + 'output-metadata.json';
-const CHANGELOG_PATH = APK_FOLDER + 'changelog';
-const REVISION_PATH = APK_FOLDER + 'revision';
 
 
 process.on('unhandledRejection', up => { throw up });
@@ -56,8 +54,8 @@ process.on('unhandledRejection', up => { throw up });
   oAuth2Client.setCredentials(token);
   
   const outputInfo=JSON.parse(await readFileAsync(OUTPUT_PATH))
-  const revision = await readFileAsync(REVISION_PATH)
-  const changeLog = await readFileAsync(CHANGELOG_PATH);
+  const revision = process.env.REVISION_ID
+  const changeLog = process.env.REVISION_CHANGES
   
 
   var apkData = outputInfo.elements[0];
