@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 // [START drive_quickstart]
+//require("dotenv").config();
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
@@ -28,7 +29,7 @@ const SECRET_FOLDER = '/secrets/';
 const args = process.argv.slice(2)
 
 
-const APK_FOLDER = args[0];
+const APK_FOLDER = '/apk/'//args[0];
 
 
 const rootFolderId=process.env.GDRIVE_ROOT_FOLDER_ID
@@ -40,7 +41,9 @@ const OUTPUT_PATH = APK_FOLDER + 'output-metadata.json';
 
 process.on('unhandledRejection', up => { throw up });
 (async function(){
+
   console.log(OUTPUT_PATH);
+  console.log(rootFolderId);
   const readFileAsync = util.promisify(fs.readFile)
   console.log(CREDENTIALS_PATH)
   const credentials= JSON.parse(await readFileAsync(CREDENTIALS_PATH))
@@ -54,8 +57,8 @@ process.on('unhandledRejection', up => { throw up });
   oAuth2Client.setCredentials(token);
   
   const outputInfo=JSON.parse(await readFileAsync(OUTPUT_PATH))
-  const revision = process.env.REVISION_ID
-  const changeLog = process.env.REVISION_CHANGES
+  const revision = process.env.REV
+  const changeLog = await readFileAsync(APK_FOLDER+"/changelog")
   
 
   var apkData = outputInfo.elements[0];
