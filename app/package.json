@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "googleapis": "39.2.0",
-    "aws-sdk": "2.604.0",
+    "aws-sdk": "2.814.0",
     "dotenv": "16.4.5"
   }
 }
